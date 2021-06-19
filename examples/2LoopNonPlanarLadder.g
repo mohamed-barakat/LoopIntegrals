@@ -40,3 +40,12 @@ Display( EntriesOfHomalgMatrix( CertainColumns( S, [ 3 ] ) ) );
 #! [ 0, 0, 0, 0,
 #!   -D3*D6+D4*D6, D1*D6+2*D3*D6-2*D4*D6-D6*N7, -D3*D6-D5*D6+D6*N7, 0 ]
 #! @EndExample
+
+ibps := MatrixOfIBPRelations( LD );
+Y := HomalgRing( ibps );
+
+Q := HomalgFieldOfRationalsInMaple();
+P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
+P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
+P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+mibps := P * ibps;

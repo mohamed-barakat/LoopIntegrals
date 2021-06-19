@@ -117,4 +117,18 @@ sibp4 := IBPRelation( CertainColumns( S, [ 4 ] ), LD, [ 1, 1, 1, 1, 1 ] );
 #! |[ d*D4*D5-2*D4*D5 ]|
 ViewList( DecomposeInMonomials( sibp4 ) );
 #! [ [ |[ d-2 ]|, |[ D4*D5 ]| ] ]
+Y := HomalgRing( Sibp1 );
+#! Q[d,s][a1,a2,a3,a4,a5]<D1,D1_,D2,D2_,D3,D3_,D4,D4_,D5,D5_>/
+#! ( D5*D5_-1, D4*D4_-1, D3*D3_-1, D2*D2_-1, D1*D1_-1 )
 #! @EndExample
+
+Q := HomalgFieldOfRationalsInMaple();
+P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
+P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
+P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+mibps := P * MatrixOfIBPRelations( LD );
+
+# prel2 := ParametricIBPs( LD, 2 );
+# m := Q * prel2[1];
+# b := BasisOfRows( m );
+# homalgDisplay( [ "map(factor,", b, "):" ] );

@@ -124,3 +124,32 @@ prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 #! [ <A non-zero 7 x 11 matrix over an external ring>,
 #!   [ D1_*D3_, D1_*D4_, D2_*D4_, D3_*D4_, D1_, D2_, D3_, D4_, 1, D1, D2 ] ]
 #! @EndExample
+
+Q := HomalgFieldOfRationalsInMaple();
+P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
+P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
+P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+mibps := P * ibps;
+
+#From: Jan Piclum <piclum@physik.uni-siegen.de>
+#Subject: 1LoopBox
+#Date: 30. November 2020 at 16:03:03 CET
+#To: Mohamed Barakat <mohamed.barakat@uni-siegen.de>
+#Cc: Tobias Huber <huber@physik.uni-siegen.de>, Robin Brüser <Robin.Brueser@uni-siegen.de>
+
+#Hallo Mohamed,
+
+#hier ist die FIRE-Reduktion für die 1LoopBox:
+
+#D1_ -> (-5 + D)/s12 - (4*(-5 + D)*(-3 + D)*D1*D3)/((-6 + D)*s12*s14^2)
+#D2_ -> (-5 + D)/s14 - (4*(-5 + D)*(-3 + D)*D2*D4)/((-6 + D)*s12^2*s14)
+#D3_ -> (-5 + D)/s12 - (4*(-5 + D)*(-3 + D)*D1*D3)/((-6 + D)*s12*s14^2)
+#D4_ -> (-5 + D)/s14 - (4*(-5 + D)*(-3 + D)*D2*D4)/((-6 + D)*s12^2*s14)
+
+#Viele Grüße
+#Jan.
+
+
+#homalgDisplay( [ "subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), ")" ], Q );
+# Die GB ist nur wichtig fuer die Reduktion, aber sie würde sehr allgemeine Reduktionen erlauben, wir sind aber nur an den Reduktionen interessiert.
+# Reduziere nur die Di's, Di_'s und die Ni's

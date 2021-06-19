@@ -88,4 +88,14 @@ w := ( d - 2 * 1 - 2 * ( 4 - 2 ) ) * D1_^(4-2);
 #! |[ d*D1_^2-6*D1_^2 ]|
 DecideZero( w, bas );
 #! |[ d*D1_^2-6*D1_^2 ]|
+gen := GeneratorsOfScalelessSectors( LD );
+#! <A 1 x 1 matrix over an external ring>
+Display( gen );
+#! D1
 #! @EndExample
+
+Q := HomalgFieldOfRationalsInMaple();
+P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
+P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
+P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+mibps := P * ibps;

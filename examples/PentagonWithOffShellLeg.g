@@ -41,3 +41,12 @@ S := SyzygiesOfColumns( E12 );
 Display( EntriesOfHomalgMatrix( CertainColumns( S, [ 1 ] ) ) );
 #! [ D1*D4*D5-D3*D4*D5, D1*D4*D5, D1*D4*D5, 0, 0 ]
 #! @EndExample
+
+ibps := MatrixOfIBPRelations( LD );
+Y := HomalgRing( ibps );
+
+Q := HomalgFieldOfRationalsInMaple();
+P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
+P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
+P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+mibps := P * ibps;
