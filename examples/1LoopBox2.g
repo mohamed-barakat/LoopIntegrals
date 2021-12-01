@@ -3,21 +3,21 @@
 LoadPackage( "LoopIntegrals" );
 
 #! @Example
-LD := LoopDiagram( "l1", "k1..2,k4" );
-#! <A loop diagram with loop momenta [ l1 ] & external momenta [ k1, k2, k4 ]>
-s12 := 2*k1*k2;
-#! 2*k1*k2
+LD := LoopDiagram( "k1", "p1..2,p4" );
+#! <A loop diagram with loop momenta [ k1 ] & external momenta [ p1, p2, p4 ]>
+s12 := 2*p1*p2;
+#! 2*p1*p2
 SetAbbreviation( s12, "s12" );
-s14 := 2*k1*k4;
-#! 2*k1*k4
+s14 := 2*p1*p4;
+#! 2*p1*p4
 SetAbbreviation( s14, "s14" );
-rel1 := List( ExternalMomenta( LD ), k -> k^2 );
-#! [ k1^2, k2^2, k4^2 ]
-rel2 := [ (k1+k2+k4)^2 ];;
+rel1 := List( ExternalMomenta( LD ), p -> p^2 );
+#! [ p1^2, p2^2, p4^2 ]
+rel2 := [ (p1+p2+p4)^2 ];;
 SetRelationsOfExternalMomenta( LD, Concatenation( rel1, rel2 ) );
 SetIndependentLorentzInvariants( LD,
-        [ l1^2, l1*k1, l1*k2, l1*k4, s12, s14 ] );
-SetPropagators( LD, -[ l1^2, (l1-k1)^2, (l1-k1-k2)^2, (l1+k4)^2 ] );
+        [ k1^2, k1*p1, k1*p2, k1*p4, s12, s14 ] );
+SetPropagators( LD, -[ k1^2, (k1-p1)^2, (k1-p1-p2)^2, (k1+p4)^2 ] );
 SetNumerators( LD, -[ ] );
 SetExtraLorentzInvariants( LD, [ s12, s14 ] );
 R := RingOfLoopDiagram( LD );
@@ -32,8 +32,8 @@ ViewList( DecomposeInMonomials( ibp1 ) );
 #!   [ |[ -a4 ]|, |[ D1*D4_ ]| ],
 #!   [ |[ -s12*a3 ]|, |[ D3_ ]| ],
 #!   [ |[ d-2*a1-a2-a3-a4 ]|, |[ 1 ]| ] ]
-Ypol := HomalgRing( ibp1 );
-#! Q[d,s12,s14][a1,a2,a3,a4]<D1,D1_,D2,D2_,D3,D3_,D4,D4_>/( D4*D4_-1, D3*D3_-1,\
+Y := HomalgRing( ibp1 );
+#! Q[D,s12,s14][a1,a2,a3,a4]<D1,D1_,D2,D2_,D3,D3_,D4,D4_>/( D4*D4_-1, D3*D3_-1,\
 #!   D2*D2_-1, D1*D1_-1 )
 E12 := PairOfMatricesOfLoopDiagramInPropagators( LD );
 #! [ <A 4 x 4 matrix over an external ring>,
@@ -44,8 +44,8 @@ Display( E12[1] );
 #! s12+D1+D3,s12+D1-D2, D2-D3,     -s12-D1+D4,
 #! D1+D4,    -s14+D1-D2,s14+D2-D3, -D1+D4
 S := SyzygiesOfColumns( E12 );
-#! <A non-zero 4 x 8 matrix over an external ring>
-Sred := ReducedBasisOfColumnModule( BasisOfColumnModule( S ) );
+#! <A non-zero 4 x 12 matrix over an external ring>
+Sred := ReducedBasisOfColumnModule( S );
 #! <A non-zero 4 x 6 matrix over an external ring>
 Display( Sred );
 #! D2-D4,D1-D3,s12*D4+2*D3*D4-2*D4^2,     s14*D3-2*D3^2+2*D3*D4,-D3*D4^2,D3^2*D4,
@@ -120,27 +120,13 @@ gen2 := GeneratorsOfScalelessSectors( LD, [ 2, 2, 2, 2 ] );
 #! <An unevaluated 1 x 4 matrix over an external ring>
 Display( gen2 );
 #! D1*D2*D3^2*D4^2,D1^2*D2*D3*D4^2,D1*D2^2*D3^2*D4,D1^2*D2^2*D3*D4
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
-#! [ <A non-zero 7 x 11 matrix over an external ring>,
-#!   [ D1_*D3_, D1_*D4_, D2_*D4_, D3_*D4_, D1_, D2_, D3_, D4_, 1, D1, D2 ] ]
 #! @EndExample
-
-#SortedList( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], function( a, b ) return a = LeadingMonomial( a + b ); end );
 
 Q := HomalgFieldOfRationalsInMaple();
 P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
 P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
 P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
 mibps := P * ibps;
-
-# prel2 := ParametricIBPs( LD, 2 );
-# m := Q * prel2[1];
-# b := BasisOfRows( m );
-# homalgDisplay( [ "map(factor,", b, "):" ] );
-
-# : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168 ]; # -> 1:54
-# : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168, 169, 170, 171, 172, 174, 175, 176, 177, 178, 179 ]; # -> 4:26
-# : subset := "all" -> 3:58
 
 #From: Jan Piclum <piclum@physik.uni-siegen.de>
 #Subject: 1LoopBox
@@ -161,9 +147,11 @@ mibps := P * ibps;
 #Jan.
 
 
-#b := HomalgMatrix( "[D1_]", 1, 1, P );
-#b := HomalgMatrix( "[D2_]", 1, 1, P );
-#b := HomalgMatrix( "[D1*D2]", 1, 1, P ); ## scaleless
-#homalgDisplay( [ "simplify(subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), "))" ], Q );
-# Die GB ist nur fuer die Reduktion wichtig, sie würde aber sehr allgemeine Reduktionen erlauben
-# Wir sind aber nur an folgende Reduktionen vor dem Einsetzen der a_i's interessiert: Reduziere nur die Di's, Di_'s und die Ni's
+#homalgDisplay( [ "subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), ")" ], Q );
+# Die GB ist nur wichtig fuer die Reduktion, aber sie würde sehr allgemeine Reduktionen erlauben, wir sind aber nur an den Reduktionen interessiert.
+# Reduziere nur die Di's, Di_'s und die Ni's
+
+d := DimensionOfCoefficientsVector( LD ); R := RingOfLoopDiagram( LD );
+jan := HomalgMatrix( [ 1,0,0,0,  1,-1,0,0, 1,-1,-1,0,  1,0,0,1 ], d, d, R );
+jbps := MatrixOfIBPRelations( jan, LD );
+mjbps := P * jbps;

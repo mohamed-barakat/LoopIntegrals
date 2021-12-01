@@ -110,3 +110,11 @@ EntriesOfHomalgMatrix( gen );
 #!   D3*D5*D6*N8*N9, D2*D3*D6*N8*N9, D1*D4*D5*N8*N9, D1*D2*D4*N8*N9,
 #!   D1*D2*D3*N8*N9 ]
 #! @EndExample
+
+ibps := MatrixOfIBPRelations( LD );
+Y := HomalgRing( ibps );
+Q := HomalgFieldOfRationalsInMaple();
+P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
+P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
+P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+mibps := P * ibps;

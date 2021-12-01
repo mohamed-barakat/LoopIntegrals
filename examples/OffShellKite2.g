@@ -15,17 +15,26 @@ SetExtraLorentzInvariants( LD, [ s ] );
 #! @EndExample
 
 ibps := MatrixOfIBPRelations( LD );
+sibps := MatrixOfSpecialIBPRelations( LD );
+
 Y := HomalgRing( ibps );
 Q := HomalgFieldOfRationalsInMaple();
 P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
 P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
 P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
+
 mibps := P * ibps;
+msibps := P * sibps;
+
+d := DimensionOfCoefficientsVector( LD ); R := RingOfLoopDiagram( LD );
+jan1 := HomalgMatrix( [ 1,0,0,  1,0,1,  1,1,0 ], d/2, d/2, R );
+jan2 := HomalgMatrix( [ 0,1,0,  0,1,-1,  1,1,0 ], d/2, d/2, R );
+jan := DiagMat( [ jan1, jan2 ] );
+jbps := MatrixOfIBPRelations( jan, LD );
+mjbps := P * jbps;
+
 
 # prel2 := ParametricIBPs( LD, 2 );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );
-
-## prel2 := ParametricIBPs( LD, 2 );
-## Manually killed after 488G 2170h

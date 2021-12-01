@@ -1,0 +1,10 @@
+Try to produces IBPs with exactly one term of highest order (in some sense,
+see Jan's PDF), try to keep the order small. Motivation: At the end of the day
+we want have a clear elimination strategy.
+
+See also: https://arxiv.org/pdf/1310.1145.pdf
+
+Problem: Can we generate enough IBPs to reach a triangular form?
+
+Rethink David's Ansatz if there is a way to reach these IBPs by commutative
+GB methods
