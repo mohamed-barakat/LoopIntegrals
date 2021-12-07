@@ -1135,6 +1135,45 @@ InstallMethod( RationalDoubleShiftAlgebra,
 end );
 
 ##
+ReversedDoubleShiftAlgebra :=
+  function( R )
+    local Ds, D_s, c, exponents, B, A, shifts, pairs, Y;
+    
+    if IsBound( R!.ReversedDoubleShiftAlgebra ) then
+        return R!.ReversedDoubleShiftAlgebra;
+    fi;
+    
+    Ds := RelativeIndeterminatesOfPolynomialRing( R );
+    
+    Ds := List( Ds, String );
+    
+    D_s := List( Ds, D -> Concatenation( D, "_" ) );
+    
+    c := Length( Ds );
+    
+    exponents := List( [ 1 .. c ], i -> Concatenation( LOOP_INTEGRALS.ExponentSymbol, String( i ) ) );
+    
+    B := BaseRing( R );
+    
+    A := B * JoinStringsWithSeparator( exponents );
+    
+    if IsIdenticalObj( ValueOption( "pairs" ), false ) then
+        shifts := Concatenation( D_s, Ds );
+        pairs := false;
+    else
+        shifts := Concatenation( ListN( D_s, Ds, {d, d_} -> [ d, d_ ] ) );
+        pairs := true;
+    fi;
+    
+    Y := DoubleShiftAlgebra( A, shifts : steps := 1, pairs := pairs );
+    
+    R!.ReversedDoubleShiftAlgebra := Y;
+    
+    return Y;
+    
+end;
+
+##
 InstallMethod( AssociatedWeylAlgebra,
         [ IsLoopDiagram and HasRelationsOfExternalMomenta and HasPropagators and HasNumerators and HasExtraLorentzInvariants ],
         

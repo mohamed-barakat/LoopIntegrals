@@ -125,7 +125,8 @@ prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 #!   [ D1_*D3_, D1_*D4_, D2_*D4_, D3_*D4_, D1_, D2_, D3_, D4_, 1, D1, D2 ] ]
 #! @EndExample
 
-#SortedList( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], function( a, b ) return a = LeadingMonomial( a + b ); end );
+#y := AmbientRing( ReversedDoubleShiftAlgebra( RingOfLoopDiagram( LD ) ) );
+#SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
 
 Q := HomalgFieldOfRationalsInMaple();
 P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
