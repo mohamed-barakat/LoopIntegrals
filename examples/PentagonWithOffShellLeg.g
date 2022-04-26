@@ -43,10 +43,7 @@ Display( EntriesOfHomalgMatrix( CertainColumns( S, [ 1 ] ) ) );
 #! @EndExample
 
 ibps := MatrixOfIBPRelations( LD );
-Y := HomalgRing( ibps );
+Ypol := HomalgRing( ibps );
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

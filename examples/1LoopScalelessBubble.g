@@ -20,7 +20,7 @@ ibp1 := ibps[1,1];
 ViewList( DecomposeInMonomials( ibp1 ) );
 #! [ [ |[ -a2 ]|, |[ D1*D2_ ]| ],
 #!   [ |[ d-2*a1-a2 ]|, |[ 1 ]| ] ]
-Y := HomalgRing( ibp1 );
+Ypol := HomalgRing( ibp1 );
 #! Q[d][a1,a2]<D1,D1_,D2,D2_>/( D2*D2_-1, D1*D1_-1 )
 bas := BasisOfRows( ibps );
 #! <A non-zero 5 x 1 matrix over a residue class ring>
@@ -34,8 +34,5 @@ Display( gen2 );
 #! D1*D2^2,D1^2*D2
 #! @EndExample
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

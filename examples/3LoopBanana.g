@@ -13,13 +13,10 @@ SetNumerators( LD, -[ (l1+l2)^2, (l1+l3)^2 ] );
 SetExtraLorentzInvariants( LD, [ ] );
 ibps := MatrixOfIBPRelations( LD );
 #! <A 9 x 1 matrix over a residue class ring>
-Y := HomalgRing( ibps );
+Ypol := HomalgRing( ibps );
 #! Q[m1,m3,D][a1,a2,a3,a4,a5,a6]<D1,D1_,D2,D2_,D3,D3_,D4,D4_,N5,N5_,N6,N6_>/
 #!  ( N6*N6_-1, N5*N5_-1, D4*D4_-1, D3*D3_-1, D2*D2_-1, D1*D1_-1 )
 #! @EndExample
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

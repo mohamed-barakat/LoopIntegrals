@@ -39,3 +39,6 @@ gen2 := GeneratorsOfScalelessSectors( LD, [ 2, 2 ] );
 Display( gen2 );
 #! D1^2*D2
 #! @EndExample
+
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

@@ -128,11 +128,8 @@ prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 #y := AmbientRing( ReversedDoubleShiftAlgebra( RingOfLoopDiagram( LD ) ) );
 #SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;
 
 # prel2 := ParametricIBPs( LD, 2 );
 # m := Q * prel2[1];

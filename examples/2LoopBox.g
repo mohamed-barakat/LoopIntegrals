@@ -22,6 +22,8 @@ SetPropagators( LD,
            (l1+l2)^2 ] );
 SetNumerators( LD, -[ l1*k4, l2*k1 ] );
 SetExtraLorentzInvariants( LD, [ s12, s14 ] );
+R := RingOfLoopDiagram( LD );
+#! Q[d,s12,s14][D1,D2,D3,D4,D5,D6,D7,N8,N9]
 E12 := PairOfMatricesOfLoopDiagramInPropagators( LD );
 #! [ <A 7 x 10 matrix over an external ring>,
 #!   <A 7 x 7 matrix over an external ring> ]
@@ -112,9 +114,7 @@ EntriesOfHomalgMatrix( gen );
 #! @EndExample
 
 ibps := MatrixOfIBPRelations( LD );
-Y := HomalgRing( ibps );
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Ypol := HomalgRing( ibps );
+
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

@@ -40,8 +40,5 @@ Display( gen2 );
 #! D1^2*D2^2
 #! @EndExample
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

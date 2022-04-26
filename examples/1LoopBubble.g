@@ -49,8 +49,5 @@ EntriesOfHomalgMatrix( prel2[1][5] );
 #!   (-d^2+3*d*a1+3*d*a2+d-2*a1^2-4*a1*a2-2*a1-2*a2^2-2*a2) ]
 #! @EndExample
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;

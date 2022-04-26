@@ -32,8 +32,8 @@ ViewList( DecomposeInMonomials( ibp1 ) );
 #!   [ |[ -a4 ]|, |[ D1*D4_ ]| ],
 #!   [ |[ -s12*a3 ]|, |[ D3_ ]| ],
 #!   [ |[ d-2*a1-a2-a3-a4 ]|, |[ 1 ]| ] ]
-Y := HomalgRing( ibp1 );
-#! Q[D,s12,s14][a1,a2,a3,a4]<D1,D1_,D2,D2_,D3,D3_,D4,D4_>/( D4*D4_-1, D3*D3_-1,\
+Ypol := HomalgRing( ibp1 );
+#! Q[d,s12,s14][a1,a2,a3,a4]<D1,D1_,D2,D2_,D3,D3_,D4,D4_>/( D4*D4_-1, D3*D3_-1,\
 #!   D2*D2_-1, D1*D1_-1 )
 E12 := PairOfMatricesOfLoopDiagramInPropagators( LD );
 #! [ <A 4 x 4 matrix over an external ring>,
@@ -122,11 +122,8 @@ Display( gen2 );
 #! D1*D2*D3^2*D4^2,D1^2*D2*D3*D4^2,D1*D2^2*D3^2*D4,D1^2*D2^2*D3*D4
 #! @EndExample
 
-Q := HomalgFieldOfRationalsInMaple();
-P := Q * List( Indeterminates( BaseRing( BaseRing( Y ) ) ), String );
-P := P * List( RelativeIndeterminateCoordinatesOfDoubleShiftAlgebra( Y ), String );
-P := DoubleShiftAlgebra( P, List( IndeterminateShiftsOfDoubleShiftAlgebra( Y ), String ) : pairs := true, steps := -1 );
-mibps := P * ibps;
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;
 
 #From: Jan Piclum <piclum@physik.uni-siegen.de>
 #Subject: 1LoopBox
