@@ -20,3 +20,11 @@ Ypol := HomalgRing( ibps );
 
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
+
+# BasisOfRows( ibps );
+# --> too long
+
+# BasisOfRows( mibps );
+# Error, the external CAS Maple (which should be running with PID 2059789) seems to have died!
+# The last error was:
+# Execution stopped: Stack limit reached.

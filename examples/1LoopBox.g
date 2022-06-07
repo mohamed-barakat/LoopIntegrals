@@ -165,3 +165,45 @@ mibps := Y * ibps;
 #homalgDisplay( [ "simplify(subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), "))" ], Q );
 # Die GB ist nur fuer die Reduktion wichtig, sie würde aber sehr allgemeine Reduktionen erlauben
 # Wir sind aber nur an folgende Reduktionen vor dem Einsetzen der a_i's interessiert: Reduziere nur die Di's, Di_'s und die Ni's
+
+# nf := UnionOfRows( NF1, NF2, NF3, NF4 );
+# BasisOfRows( nf );
+# c := RightDivide( mibps, nf );
+# Error, the external CAS Maple (which should be running with PID 3441074) seems to have died!
+# The last error was:
+# maple: fatal error, lost connection to kernel
+
+
+# gap> b1 := HomalgMatrix( "[(D-2*(a1+a2+1))*(D-2*(a1+a4+1))*s12*s14*a1*D1_]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> RHS1 := HomalgMatrix( "[ -2 * (D-2*(a1+a2+a4))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1)) * D3 + 4 * (a3-1)*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a1+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a1+a2+1))*s14 ]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> NF1 := b1 - RHS1;
+# <An unevaluated 1 x 1 matrix over a residue class ring>
+# gap> DecideZeroRows( NF1, ibps );
+# <A 1 x 1 zero matrix over a residue class ring>
+# gap> b2 := HomalgMatrix( "[(D-2*(a1+a2+1))*(D-2*(a2+a3+1))*s12*s14*a2*D2_]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> RHS2 := HomalgMatrix( "[ 4 * (D-(a1+a2+a3+a4))*(a4-1)*(D-(a1+a2+a3+a4+1)) * D3 -2 * (D-2*(a1+a2+a3))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a1+a2+1))*s12 ]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> NF2 := b2 - RHS2;
+# <An unevaluated 1 x 1 matrix over a residue class ring>
+# gap> DecideZeroRows( NF2, ibps );
+#! <A 1 x 1 zero matrix over a residue class ring>
+# gap> b3 := HomalgMatrix( "[(D-2*(a2+a3+1))*(D-2*(a3+a4+1))*s12*s14*a3*D3_]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> RHS3 := HomalgMatrix( "[ -2 * (D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1)) * D3 + 4 * (a1-1)*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a1+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a2+a3+1))*s14 - 2*(a1-a3)*(D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4+1)) * s12 ]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> NF3 := b3 - RHS3;
+# <An unevaluated 1 x 1 matrix over a residue class ring>
+# gap> DecideZeroRows( NF3, ibps );
+# <A 1 x 1 zero matrix over a residue class ring>
+# gap> b4 := HomalgMatrix( "[(D-2*(a1+a4+1))*(D-2*(a3+a4+1))*s12*s14*a4*D4_]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> RHS4 := HomalgMatrix( "[ 4 * (D-(a1+a2+a3+a4))*(a2-1)*(D-(a1+a2+a3+a4+1)) * D3 -2 * (D-2*(a1+a3+a4))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a1+a4+1))*s12 - 2 * (a2-a4) * (D-2*(a1+a3+a4)) * (D-(a1+a2+a3+a4+1)) * s14 ]", 1, 1, Y );
+# <A 1 x 1 matrix over a residue class ring>
+# gap> NF4 := b4 - RHS4;
+# <An unevaluated 1 x 1 matrix over a residue class ring>
+# gap> DecideZeroRows( NF4, ibps );
+# <A 1 x 1 zero matrix over a residue class ring>
+# gap> DecideZeroRows( ibps, UnionOfRows( NF1, NF2, NF3, NF4 ) );

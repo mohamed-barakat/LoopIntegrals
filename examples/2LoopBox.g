@@ -118,3 +118,11 @@ Ypol := HomalgRing( ibps );
 
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
+
+# gap> BasisOfRows( ibps );
+# -> 180 days, 41 GB
+
+# gap> sibps := MatrixOfSpecialIBPRelations( LD );
+# <A 96 x 1 matrix over a residue class ring>
+# gap> BasisOfRows( sibps );
+# -> 180 days, 41 GB

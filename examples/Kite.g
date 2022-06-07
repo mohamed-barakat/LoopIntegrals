@@ -133,3 +133,8 @@ mibps := Y * ibps;
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, "):" ] );
+
+# BasisOfRows( mibps );
+# Error, the external CAS Maple (which should be running with PID 1741341) seems to have died!
+# The last error was:
+# Execution stopped: Stack limit reached.
