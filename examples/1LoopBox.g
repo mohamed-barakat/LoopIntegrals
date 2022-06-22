@@ -125,20 +125,47 @@ prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 #!   [ D1_*D3_, D1_*D4_, D2_*D4_, D3_*D4_, D1_, D2_, D3_, D4_, 1, D1, D2 ] ]
 #! @EndExample
 
-#y := AmbientRing( ReversedDoubleShiftAlgebra( RingOfLoopDiagram( LD ) ) );
-#SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
-
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
+mbas := BasisOfRows( mibps );
 
-# prel2 := ParametricIBPs( LD, 2 );
-# m := Q * prel2[1];
-# b := BasisOfRows( m );
-# homalgDisplay( [ "map(factor,", b, "):" ] );
+lhs1 := HomalgMatrix( "[a1*D1_]", 1, 1, Y );
+R1 := lhs1 - DecideZeroRows( lhs1, mbas );
+lhs2 := HomalgMatrix( "[a2*D2_]", 1, 1, Y );
+R2 := lhs2 - DecideZeroRows( lhs2, mbas );
+lhs3 := HomalgMatrix( "[a3*D3_]", 1, 1, Y );
+R3 := lhs3 - DecideZeroRows( lhs3, mbas );
+lhs4 := HomalgMatrix( "[a4*D4_]", 1, 1, Y );
+R4 := lhs4 - DecideZeroRows( lhs4, mbas );
 
-# : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168 ]; # -> 1:54
-# : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168, 169, 170, 171, 172, 174, 175, 176, 177, 178, 179 ]; # -> 4:26
-# : subset := "all" -> 3:58
+Ris := UnionOfRows( [ R1, R2, R3, R3 ] );
+
+b1 := HomalgMatrix( "[(d-2*(a1+a2+1))*(d-2*(a1+a4+1))*s12*s14*a1*D1_]", 1, 1, Ypol );
+RHS1 := HomalgMatrix( "[ -2 * (d-2*(a1+a2+a4))*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1)) * D3 + 4 * (a3-1)*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1))*D4+(d-2*(a1+a3+a4))*(d-(a1+a2+a3+a4+1))*(d-2*(a1+a2+1))*s14 ]", 1, 1, Ypol );
+NF1 := b1 - RHS1;
+Assert( 0, IsZero( DecideZeroRows( NF1, ibps ) ) );
+b2 := HomalgMatrix( "[(d-2*(a1+a2+1))*(d-2*(a2+a3+1))*s12*s14*a2*D2_]", 1, 1, Ypol );
+RHS2 := HomalgMatrix( "[ 4 * (d-(a1+a2+a3+a4))*(a4-1)*(d-(a1+a2+a3+a4+1)) * D3 -2 * (d-2*(a1+a2+a3))*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1))*D4+(d-2*(a2+a3+a4))*(d-(a1+a2+a3+a4+1))*(d-2*(a1+a2+1))*s12 ]", 1, 1, Ypol );
+NF2 := b2 - RHS2;
+Assert( 0, IsZero( DecideZeroRows( NF2, ibps ) ) );
+b3 := HomalgMatrix( "[(d-2*(a2+a3+1))*(d-2*(a3+a4+1))*s12*s14*a3*D3_]", 1, 1, Ypol );
+RHS3 := HomalgMatrix( "[ -2 * (d-2*(a2+a3+a4))*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1)) * D3 + 4 * (a1-1)*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1))*D4+(d-2*(a1+a3+a4))*(d-(a1+a2+a3+a4+1))*(d-2*(a2+a3+1))*s14 - 2*(a1-a3)*(d-2*(a2+a3+a4))*(d-(a1+a2+a3+a4+1)) * s12 ]", 1, 1, Ypol );
+NF3 := b3 - RHS3;
+Assert( 0, IsZero( DecideZeroRows( NF3, ibps ) ) );
+b4 := HomalgMatrix( "[(d-2*(a1+a4+1))*(d-2*(a3+a4+1))*s12*s14*a4*D4_]", 1, 1, Ypol );
+RHS4 := HomalgMatrix( "[ 4 * (d-(a1+a2+a3+a4))*(a2-1)*(d-(a1+a2+a3+a4+1)) * D3 -2 * (d-2*(a1+a3+a4))*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1))*D4+(d-2*(a2+a3+a4))*(d-(a1+a2+a3+a4+1))*(d-2*(a1+a4+1))*s12 - 2 * (a2-a4) * (d-2*(a1+a3+a4)) * (d-(a1+a2+a3+a4+1)) * s14 ]", 1, 1, Ypol );
+NF4 := b4 - RHS4;
+Assert( 0, IsZero( DecideZeroRows( NF4, ibps ) ) );
+nf := UnionOfRows( NF1, NF2, NF3, NF4 );
+Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
+
+# DecideZeroRows( ibps, UnionOfRows( NF1, NF2, NF3, NF4 ) );
+# nf := UnionOfRows( NF1, NF2, NF3, NF4 );
+# BasisOfRows( nf );
+# c := RightDivide( mibps, nf );
+# Error, the external CAS Maple (which should be running with PID 3441074) seems to have died!
+# The last error was:
+# maple: fatal error, lost connection to kernel
 
 #From: Jan Piclum <piclum@physik.uni-siegen.de>
 #Subject: 1LoopBox
@@ -158,52 +185,23 @@ mibps := Y * ibps;
 #Viele Grüße
 #Jan.
 
-
-#b := HomalgMatrix( "[D1_]", 1, 1, P );
-#b := HomalgMatrix( "[D2_]", 1, 1, P );
-#b := HomalgMatrix( "[D1*D2]", 1, 1, P ); ## scaleless
-#homalgDisplay( [ "simplify(subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), "))" ], Q );
+# b := "D1_" / Y;
+# b := "D2_" / Y;
+# b := "D1*D2" / Y; ## scaleless
+# NormalFormWrtInitialIntegral( b / Y, mbas );
 # Die GB ist nur fuer die Reduktion wichtig, sie würde aber sehr allgemeine Reduktionen erlauben
 # Wir sind aber nur an folgende Reduktionen vor dem Einsetzen der a_i's interessiert: Reduziere nur die Di's, Di_'s und die Ni's
 
-# nf := UnionOfRows( NF1, NF2, NF3, NF4 );
-# BasisOfRows( nf );
-# c := RightDivide( mibps, nf );
-# Error, the external CAS Maple (which should be running with PID 3441074) seems to have died!
-# The last error was:
-# maple: fatal error, lost connection to kernel
+#y := AmbientRing( ReversedDoubleShiftAlgebra( RingOfLoopDiagram( LD ) ) );
+#SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
 
+Q := CoefficientsRing( AmbientRing( Y ) );
 
-# gap> b1 := HomalgMatrix( "[(D-2*(a1+a2+1))*(D-2*(a1+a4+1))*s12*s14*a1*D1_]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> RHS1 := HomalgMatrix( "[ -2 * (D-2*(a1+a2+a4))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1)) * D3 + 4 * (a3-1)*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a1+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a1+a2+1))*s14 ]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> NF1 := b1 - RHS1;
-# <An unevaluated 1 x 1 matrix over a residue class ring>
-# gap> DecideZeroRows( NF1, ibps );
-# <A 1 x 1 zero matrix over a residue class ring>
-# gap> b2 := HomalgMatrix( "[(D-2*(a1+a2+1))*(D-2*(a2+a3+1))*s12*s14*a2*D2_]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> RHS2 := HomalgMatrix( "[ 4 * (D-(a1+a2+a3+a4))*(a4-1)*(D-(a1+a2+a3+a4+1)) * D3 -2 * (D-2*(a1+a2+a3))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a1+a2+1))*s12 ]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> NF2 := b2 - RHS2;
-# <An unevaluated 1 x 1 matrix over a residue class ring>
-# gap> DecideZeroRows( NF2, ibps );
-#! <A 1 x 1 zero matrix over a residue class ring>
-# gap> b3 := HomalgMatrix( "[(D-2*(a2+a3+1))*(D-2*(a3+a4+1))*s12*s14*a3*D3_]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> RHS3 := HomalgMatrix( "[ -2 * (D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1)) * D3 + 4 * (a1-1)*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a1+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a2+a3+1))*s14 - 2*(a1-a3)*(D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4+1)) * s12 ]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> NF3 := b3 - RHS3;
-# <An unevaluated 1 x 1 matrix over a residue class ring>
-# gap> DecideZeroRows( NF3, ibps );
-# <A 1 x 1 zero matrix over a residue class ring>
-# gap> b4 := HomalgMatrix( "[(D-2*(a1+a4+1))*(D-2*(a3+a4+1))*s12*s14*a4*D4_]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> RHS4 := HomalgMatrix( "[ 4 * (D-(a1+a2+a3+a4))*(a2-1)*(D-(a1+a2+a3+a4+1)) * D3 -2 * (D-2*(a1+a3+a4))*(D-(a1+a2+a3+a4))*(D-(a1+a2+a3+a4+1))*D4+(D-2*(a2+a3+a4))*(D-(a1+a2+a3+a4+1))*(D-2*(a1+a4+1))*s12 - 2 * (a2-a4) * (D-2*(a1+a3+a4)) * (D-(a1+a2+a3+a4+1)) * s14 ]", 1, 1, Y );
-# <A 1 x 1 matrix over a residue class ring>
-# gap> NF4 := b4 - RHS4;
-# <An unevaluated 1 x 1 matrix over a residue class ring>
-# gap> DecideZeroRows( NF4, ibps );
-# <A 1 x 1 zero matrix over a residue class ring>
-# gap> DecideZeroRows( ibps, UnionOfRows( NF1, NF2, NF3, NF4 ) );
+# prel2 := ParametricIBPs( LD, 2 );
+# m := Q * prel2[1];
+# b := BasisOfRows( m );
+# homalgDisplay( [ "map(factor,", b, "):" ] );
+
+# : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168 ]; # -> 1:54
+# : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168, 169, 170, 171, 172, 174, 175, 176, 177, 178, 179 ]; # -> 4:26
+# : subset := "all" -> 3:58
