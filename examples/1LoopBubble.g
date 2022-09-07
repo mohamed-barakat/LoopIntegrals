@@ -51,3 +51,25 @@ EntriesOfHomalgMatrix( prel2[1][5] );
 
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
+mbas := BasisOfRows( mibps );
+
+lhs1 := HomalgMatrix( "[a1*D1_]", 1, 1, Y );
+R1 := lhs1 - DecideZeroRows( lhs1, mbas );
+lhs2 := HomalgMatrix( "[a2*D2_]", 1, 1, Y );
+R2 := lhs2 - DecideZeroRows( lhs2, mbas );
+
+Ris := UnionOfRows( [ R1, R2 ] );
+
+b1 := HomalgMatrix( "[(d-2*a1-2)*s*a1*D1_]", 1, 1, Ypol );
+RHS1 := HomalgMatrix( "[ (-a2-1-a1+d)*(-2*a2-2*a1+d) ]", 1, 1, Ypol );
+NF1 := b1 - RHS1;
+Assert( 0, IsZero( DecideZeroRows( NF1, ibps ) ) );
+b2 := HomalgMatrix( "[(d-2*a2-2)*s*a2*D2_]", 1, 1, Ypol );
+RHS2 := HomalgMatrix( "[ (-a2-1-a1+d)*(-2*a2-2*a1+d) ]", 1, 1, Ypol );
+NF2 := b2 - RHS2;
+Assert( 0, IsZero( DecideZeroRows( NF2, ibps ) ) );
+
+nf := UnionOfRows( NF1, NF2 );
+Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
+
+tau := RightDivide( nf, ibps );

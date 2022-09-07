@@ -138,7 +138,7 @@ R3 := lhs3 - DecideZeroRows( lhs3, mbas );
 lhs4 := HomalgMatrix( "[a4*D4_]", 1, 1, Y );
 R4 := lhs4 - DecideZeroRows( lhs4, mbas );
 
-Ris := UnionOfRows( [ R1, R2, R3, R3 ] );
+Ris := UnionOfRows( [ R1, R2, R3, R4 ] );
 
 b1 := HomalgMatrix( "[(d-2*(a1+a2+1))*(d-2*(a1+a4+1))*s12*s14*a1*D1_]", 1, 1, Ypol );
 RHS1 := HomalgMatrix( "[ -2 * (d-2*(a1+a2+a4))*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1)) * D3 + 4 * (a3-1)*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1))*D4+(d-2*(a1+a3+a4))*(d-(a1+a2+a3+a4+1))*(d-2*(a1+a2+1))*s14 ]", 1, 1, Ypol );
@@ -156,13 +156,15 @@ b4 := HomalgMatrix( "[(d-2*(a1+a4+1))*(d-2*(a3+a4+1))*s12*s14*a4*D4_]", 1, 1, Yp
 RHS4 := HomalgMatrix( "[ 4 * (d-(a1+a2+a3+a4))*(a2-1)*(d-(a1+a2+a3+a4+1)) * D3 -2 * (d-2*(a1+a3+a4))*(d-(a1+a2+a3+a4))*(d-(a1+a2+a3+a4+1))*D4+(d-2*(a2+a3+a4))*(d-(a1+a2+a3+a4+1))*(d-2*(a1+a4+1))*s12 - 2 * (a2-a4) * (d-2*(a1+a3+a4)) * (d-(a1+a2+a3+a4+1)) * s14 ]", 1, 1, Ypol );
 NF4 := b4 - RHS4;
 Assert( 0, IsZero( DecideZeroRows( NF4, ibps ) ) );
+
 nf := UnionOfRows( NF1, NF2, NF3, NF4 );
 Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
 
-# DecideZeroRows( ibps, UnionOfRows( NF1, NF2, NF3, NF4 ) );
-# nf := UnionOfRows( NF1, NF2, NF3, NF4 );
+tau := RightDivide( nf, ibps );
+
+# DecideZeroRows( ibps, nf );
 # BasisOfRows( nf );
-# c := RightDivide( mibps, nf );
+# #c := RightDivide( mibps, nf );
 # Error, the external CAS Maple (which should be running with PID 3441074) seems to have died!
 # The last error was:
 # maple: fatal error, lost connection to kernel
