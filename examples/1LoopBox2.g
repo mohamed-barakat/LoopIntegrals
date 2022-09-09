@@ -144,7 +144,7 @@ mibps := Y * ibps;
 #Jan.
 
 
-#homalgDisplay( [ "subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), ")" ], Q );
+#homalgDisplay( [ "simplify(subs(a1=1,a2=1,a3=1,a4=1,", EvalRingElement( DecideZeroRows( b, mibps )[1,1] ), "))" ], AmbientRing( Y ) );
 # Die GB ist nur wichtig fuer die Reduktion, aber sie würde sehr allgemeine Reduktionen erlauben, wir sind aber nur an den Reduktionen interessiert.
 # Reduziere nur die Di's, Di_'s und die Ni's
 
