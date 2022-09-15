@@ -19,6 +19,10 @@ R := RingOfLoopDiagram( LD );
 #! Q[m,d,s][D1,D2]
 ibps := MatrixOfIBPRelations( LD );
 #! <A 2 x 1 matrix over a residue class ring>
+Ypol := HomalgRing( ibps );
+#! Q[m,D,s][a1,a2]<D1,D1_,D2,D2_>/( D2*D2_-1, D1*D1_-1 )
+bas := BasisOfRows( ibps );
+#! <A non-zero 6 x 1 matrix over a residue class ring>
 ibp1 := ibps[1,1];
 #! |[ -2*m^2*a1*D1_-2*m^2*a2*D2_-s*a2*D2_-a2*D1*D2_+d-2*a1-a2 ]|
 ViewList( DecomposeInMonomials( ibp1 ) );
@@ -42,3 +46,9 @@ Display( gen2 );
 
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
+mbas := BasisOfRows( mibps );
+
+lhs1 := HomalgMatrix( "[a1*D1_]", 1, 1, Y );
+R1 := lhs1 - DecideZeroRows( lhs1, mbas );
+lhs2 := HomalgMatrix( "[a2*D2_]", 1, 1, Y );
+R2 := lhs2 - DecideZeroRows( lhs2, mbas );
