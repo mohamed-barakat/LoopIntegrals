@@ -96,3 +96,7 @@ Display( gen );
 
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
+mbas := BasisOfRows( mibps );
+
+lhs1 := HomalgMatrix( "[a1*D1_]", 1, 1, Y );
+R1 := lhs1 - DecideZeroRows( lhs1, mbas );
