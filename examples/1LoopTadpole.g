@@ -3,12 +3,12 @@
 LoadPackage( "LoopIntegrals" );
 
 #! @Example
-LD := LoopDiagram( "k", "" : masses := "m" );
-#! <A loop diagram with loop momenta [ k ] & external momenta [ ] &
+LD := LoopDiagram( "l1", "" : masses := "m" );
+#! <A loop diagram with loop momenta [ l1 ] & external momenta [ ] &
 #!  masses [ m ]>
 SetRelationsOfExternalMomenta( LD, [ ] );
-SetIndependentLorentzInvariants( LD, [ k^2 ] );
-SetPropagators( LD, [ k^2 - m^2 ] );
+SetIndependentLorentzInvariants( LD, [ ] );
+SetPropagators( LD, -[ l1^2 - m^2 ] );
 SetNumerators( LD, [ ] );
 SetExtraLorentzInvariants( LD, [ ] );
 R := RingOfLoopDiagram( LD );
@@ -32,7 +32,7 @@ E12 := PairOfMatricesOfLoopDiagramInPropagators( LD );
 #! [ <A 1 x 1 matrix over an external ring>,
 #!   <A 1 x 1 matrix over an external ring> ]
 Display( E12[1] );
-#! 2*m^2+2*D1
+#! -2*m^2+2*D1
 Display( E12[2] );
 #! D1
 S := SyzygiesOfColumns( E12 );
