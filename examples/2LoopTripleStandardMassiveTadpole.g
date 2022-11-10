@@ -42,15 +42,15 @@ R3 := lhs3 - DecideZeroRows( lhs3, mbas );
 Ris := UnionOfRows( [ R1, R2, R3 ] );
 
 b1 := HomalgMatrix( "[6*a1*D1_]", 1, 1, Ypol );
-RHS1 := HomalgMatrix( "[ (-2*D+2*a1+3*a2+3*a3-4)*D1+(D-a2-3*a3+2)*D2+(D-3*a2-a3+2)*D3-2*D+4*a1+a2+a3 ]", 1, 1, Ypol );
+RHS1 := HomalgMatrix( "[ (-2*d+2*a1+3*a2+3*a3-4)*D1+(d-a2-3*a3+2)*D2+(d-3*a2-a3+2)*D3-2*d+4*a1+a2+a3 ]", 1, 1, Ypol );
 NF1 := b1 - RHS1;
 Assert( 0, IsZero( DecideZeroRows( NF1, ibps ) ) );
 b2 := HomalgMatrix( "[6*a2*D2_]", 1, 1, Ypol );
-RHS2 := HomalgMatrix( "[ (D-a1-3*a3+2)*D1+(-2*D+3*a1+2*a2+3*a3-4)*D2+(D-3*a1-a3+2)*D3-2*D+a1+4*a2+a3 ]", 1, 1, Ypol );
+RHS2 := HomalgMatrix( "[ (d-a1-3*a3+2)*D1+(-2*d+3*a1+2*a2+3*a3-4)*D2+(d-3*a1-a3+2)*D3-2*d+a1+4*a2+a3 ]", 1, 1, Ypol );
 NF2 := b2 - RHS2;
 Assert( 0, IsZero( DecideZeroRows( NF2, ibps ) ) );
 b3 := HomalgMatrix( "[6*a3*D3_]", 1, 1, Ypol );
-RHS3 := HomalgMatrix( "[ (D-a1-3*a2+2)*D1+(D-3*a1-a2+2)*D2+(-2*D+3*a1+3*a2+2*a3-4)*D3-2*D+a1+a2+4*a3 ]", 1, 1, Ypol );
+RHS3 := HomalgMatrix( "[ (d-a1-3*a2+2)*D1+(d-3*a1-a2+2)*D2+(-2*d+3*a1+3*a2+2*a3-4)*D3-2*d+a1+a2+4*a3 ]", 1, 1, Ypol );
 NF3 := b3 - RHS3;
 Assert( 0, IsZero( DecideZeroRows( NF3, ibps ) ) );
 

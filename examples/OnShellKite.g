@@ -20,3 +20,7 @@ Q := HomalgFieldOfRationalsInMaple();
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );
+
+#ibps := MatrixOfIBPRelations( LD );
+#<A 6 x 1 matrix over a residue class ring>
+#BasisOfRows( ibps ); # killed after 870 hours with 62MB memory consumption
