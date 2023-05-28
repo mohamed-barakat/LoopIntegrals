@@ -47,3 +47,14 @@ gen := GeneratorsOfScalelessSectors( LD );
 Display( gen );
 #! D2
 #! @EndExample
+
+# Below we use the Minkowski coordinates
+
+F := BaseRing( R );
+S := F["x1..3"];
+ExportVariables( S );
+subs := RingMap( [ m, d, x1, x2+m, x3+m ], S, S );
+G := Pullback( subs, HomalgMatrix( "[ 2*x1, x2-x1-x3, x2-x1-x3, 2*x3 ]", 2, 2, S ) );
+B := HomalgMatrix( [ Determinant( G ) ], 1, 1, S );
+Bi := Diff( HomalgMatrix( RelativeIndeterminatesOfPolynomialRing( S ), 3, 1, S ), B );
+M := HomalgMatrix( [ B[1,1], x1 * Bi[1,1], x2 * Bi[2,1], x3 * Bi[3,1] ], 4, 1, S );
