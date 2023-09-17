@@ -123,9 +123,9 @@ Ypol := HomalgRing( Sibp1 );
 #! @EndExample
 
 R := RingOfLoopDiagram( LD );
-#! Q[d,s][D1,D2,D3,D4,D5]
+# Q[d,s][D1,D2,D3,D4,D5]
 ibps := MatrixOfIBPRelations( LD );
-#! <A 6 x 1 matrix over a residue class ring>
+# <A 6 x 1 matrix over a residue class ring>
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
