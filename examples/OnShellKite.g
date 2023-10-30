@@ -14,9 +14,16 @@ SetNumerators( LD, -[ ] );
 SetExtraLorentzInvariants( LD, [ s ] );
 #! @EndExample
 
-Q := HomalgFieldOfRationalsInMaple();
+R := RingOfLoopDiagram( LD );
+Y := RationalDoubleShiftAlgebra( R );
+A := BaseRing( Y );
+Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+prel2 := ParametricIBPs( LD, 2, Qa );
 
-# prel2 := ParametricIBPs( LD, 2 );
+Q := CoefficientsRing( AmbientRing( Y ) );
+
+prel2 := ParametricIBPs( LD, 2 );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );

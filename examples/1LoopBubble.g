@@ -73,3 +73,13 @@ nf := UnionOfRows( NF1, NF2 );
 Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
 
 tau := RightDivide( nf, ibps );
+
+A := BaseRing( Y );
+Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+prel2 := ParametricIBPs( LD, 2, Qa );
+
+Q := CoefficientsRing( AmbientRing( Y ) );
+m := Q * prel2[1];
+b := BasisOfRows( m );
+homalgDisplay( [ "map(factor,", b, "):" ] );

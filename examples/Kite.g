@@ -129,7 +129,12 @@ ibps := MatrixOfIBPRelations( LD );
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
-# prel2 := ParametricIBPs( LD, 2 );
+A := BaseRing( Y );
+Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+prel2 := ParametricIBPs( LD, 2, Qa );
+
+Q := CoefficientsRing( AmbientRing( Y ) );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, "):" ] );
