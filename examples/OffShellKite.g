@@ -25,17 +25,17 @@ mibps := Y * ibps;
 A := BaseRing( Y );
 Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
 #Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
-prel2 := ParametricIBPs( LD, 2, Qa );
+prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );
 
-## prel2 := ParametricIBPs( LD, 2 );
+## prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 ## Manually killed after 488G 2170h
 
-## prel2 := ParametricIBPs( LD, 2 );
+## prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 ## finished after 328G 327h with the last RowEchelonForm step
 ## m;
 ## <A non-zero 21 x 46 matrix over an external ring>

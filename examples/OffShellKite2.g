@@ -32,7 +32,7 @@ jbps := MatrixOfIBPRelations( jan, LD );
 mjbps := P * jbps;
 
 
-# prel2 := ParametricIBPs( LD, 2 );
+# prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );

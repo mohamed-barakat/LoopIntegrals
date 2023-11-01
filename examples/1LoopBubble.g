@@ -77,7 +77,7 @@ tau := RightDivide( nf, ibps );
 A := BaseRing( Y );
 Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
 #Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
-prel2 := ParametricIBPs( LD, 2, Qa );
+prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 m := Q * prel2[1];
