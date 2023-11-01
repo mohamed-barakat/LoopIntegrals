@@ -14,16 +14,12 @@ SetNumerators( LD, -[ ] );
 SetExtraLorentzInvariants( LD, [ s ] );
 #! @EndExample
 
-R := RingOfLoopDiagram( LD );
 Y := RationalDoubleShiftAlgebra( R );
-A := BaseRing( Y );
-Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
-#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+
+Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
-
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );

@@ -22,9 +22,7 @@ R := RingOfLoopDiagram( LD );
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
-A := BaseRing( Y );
-Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
-#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );

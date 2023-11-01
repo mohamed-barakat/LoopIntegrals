@@ -74,9 +74,7 @@ Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
 
 tau := RightDivide( nf, ibps );
 
-A := BaseRing( Y );
-Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
-#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );

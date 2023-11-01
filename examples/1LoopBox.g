@@ -197,9 +197,7 @@ tau := RightDivide( nf, ibps );
 #y := AmbientRing( ReversedDoubleShiftAlgebra( RingOfLoopDiagram( LD ) ) );
 #SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
 
-A := BaseRing( Y );
-Qa := HomalgRingOfIntegersInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
-#Qa := HomalgFieldOfRationalsInOscar( JoinStringsWithSeparator( List( Indeterminates( A ), String ) ) );
+Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
