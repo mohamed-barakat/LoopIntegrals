@@ -74,7 +74,7 @@ Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
 
 tau := RightDivide( nf, ibps );
 
-Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
+Qa := FieldOfCoefficientsOfLoopDiagramInMaple( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
