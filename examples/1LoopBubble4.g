@@ -36,15 +36,37 @@ gen2 := GeneratorsOfScalelessSectors( LD, [ 2, 2 ] );
 #! <An unevaluated 1 x 2 matrix over an external ring>
 Display( gen2 );
 #! D1*D2^2,D1^2*D2
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
-#! [ <A non-zero 5 x 6 matrix over an external ring>,
-#!   [ D1_^2, D1_*D2_, D2_^2, D1_, D2_, 1 ] ]
-EntriesOfHomalgMatrix( prel2[1][4] );
-#! [ 0, 0, 0,
-#!   (d*s*a1-2*s*a1^2-2*s*a1), 0,
-#!   (-d^2+3*d*a1+3*d*a2+d-2*a1^2-4*a1*a2-2*a1-2*a2^2-2*a2) ]
-EntriesOfHomalgMatrix( prel2[1][5] );
-#! [ 0, 0, 0,
-#!   0, (d*s*a2-2*s*a2^2-2*s*a2),
-#!   (-d^2+3*d*a1+3*d*a2+d-2*a1^2-4*a1*a2-2*a1-2*a2^2-2*a2) ]
 #! @EndExample
+
+Y := RationalDoubleShiftAlgebra( R );
+mibps := Y * ibps;
+mbas := BasisOfRows( mibps );
+
+lhs1 := HomalgMatrix( "[a1*D1_]", 1, 1, Y );
+R1 := lhs1 - DecideZeroRows( lhs1, mbas );
+lhs2 := HomalgMatrix( "[a2*D2_]", 1, 1, Y );
+R2 := lhs2 - DecideZeroRows( lhs2, mbas );
+
+Ris := UnionOfRows( [ R1, R2 ] );
+
+b1 := HomalgMatrix( "[(d-2*a1-2)*s*a1*D1_]", 1, 1, Ypol );
+RHS1 := HomalgMatrix( "[ (-a2-1-a1+d)*(-2*a2-2*a1+d) ]", 1, 1, Ypol );
+NF1 := b1 - RHS1;
+Assert( 0, IsZero( DecideZeroRows( NF1, ibps ) ) );
+b2 := HomalgMatrix( "[(d-2*a2-2)*s*a2*D2_]", 1, 1, Ypol );
+RHS2 := HomalgMatrix( "[ (-a2-1-a1+d)*(-2*a2-2*a1+d) ]", 1, 1, Ypol );
+NF2 := b2 - RHS2;
+Assert( 0, IsZero( DecideZeroRows( NF2, ibps ) ) );
+
+nf := UnionOfRows( NF1, NF2 );
+Assert( 0, IsZero( DecideZeroRows( nf, ibps ) ) );
+
+tau := RightDivide( nf, ibps );
+
+Qa := FieldOfCoefficientsOfLoopDiagramInSingular( LD );
+prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
+
+Q := CoefficientsRing( AmbientRing( Y ) );
+m := Q * prel2[1];
+b := BasisOfRows( m );
+homalgDisplay( [ "map(factor,", b, "):" ] );
