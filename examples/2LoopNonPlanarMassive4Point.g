@@ -28,3 +28,5 @@ ibps := MatrixOfIBPRelations( LD );
 #! @EndExample
 
 
+## sibps := MatrixOfSpecialIBPRelations( LD );
+## killed after 110 days with 194GB
