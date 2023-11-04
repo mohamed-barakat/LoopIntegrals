@@ -14,10 +14,11 @@ SetNumerators( LD, -[ ] );
 SetExtraLorentzInvariants( LD, [ s ] );
 #! @EndExample
 
+R := RingOfLoopDiagram( LD );
 Y := RationalDoubleShiftAlgebra( R );
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
+prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d" );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 # m := Q * prel2[1];
