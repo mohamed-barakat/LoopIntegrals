@@ -19,6 +19,10 @@ Y := RationalDoubleShiftAlgebra( R );
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d" );
+#! [ <A non-zero 5 x 10 matrix over an external ring>,
+#!   [ D1_, D2_, D3_, D4_, D5_, 1, D3, D2, D1, D5 ] ]
+
+## computing prel2 takes 30 minutes and 23GB
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 # m := Q * prel2[1];
