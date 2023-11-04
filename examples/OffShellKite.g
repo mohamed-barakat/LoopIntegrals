@@ -23,7 +23,7 @@ Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
+prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d" );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 # m := Q * prel2[1];
