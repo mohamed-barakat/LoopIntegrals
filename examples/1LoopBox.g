@@ -198,7 +198,7 @@ tau := RightDivide( nf, ibps );
 #SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
+prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d" );
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 m := Q * prel2[1];
