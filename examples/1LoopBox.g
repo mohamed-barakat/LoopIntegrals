@@ -198,12 +198,39 @@ tau := RightDivide( nf, ibps );
 #SortedList( List( MatrixOfCoefficientsOfIBPs( BasisOfRows( ibps ) )[3], d -> d / y ), function( a, b ) return a = LeadingMonomial( a + b ); end );
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d" );
+prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", basis_of_relative_syzygies := true );
+
+## RowEchelonForm 180 x 192 : Z(d,s12,s14,a1,a2,a3,a4): takes about a minute and 4,4 GB
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 m := Q * prel2[1];
 b := BasisOfRows( m );
 homalgDisplay( [ "map(factor,", b, "):" ] );
+
+prel2[2]{NonZeroColumns( b[12] )};
+#! [ D4_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[11] )};
+#! [ D3_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[10] )};
+#! [ D2_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[9] )};
+#! [ D1_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[8] )};
+#! [ D4_^2, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[7] )};
+#! [ D3_*D4_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[6] )};
+#! [ D2_*D4_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[5] )};
+#! [ D1_*D4_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[4] )};
+#! [ D3_^2, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[3] )};
+#! [ D2_*D3_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[2] )};
+#! [ D1_*D3_, 1, D4, D3 ]
+prel2[2]{NonZeroColumns( b[1] )};
+#! [ D1_*D2_, 1, D4, D3 ]
 
 # : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168 ]; # -> 1:54
 # : subset := [ 1, 3, 5, 13, 15, 16, 17, 18, 20, 21, 22, 25, 26, 27, 30, 31, 32, 34, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52, 54, 55, 57, 59, 73, 75, 76, 77, 78, 79, 80, 84, 86, 91, 95, 97, 99, 101, 102, 103, 121, 124, 125, 126, 127, 134, 137, 138, 140, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 157, 159, 161, 162, 163, 165, 167, 168, 169, 170, 171, 172, 174, 175, 176, 177, 178, 179 ]; # -> 4:26
