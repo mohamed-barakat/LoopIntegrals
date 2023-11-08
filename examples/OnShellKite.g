@@ -52,7 +52,7 @@ prel2[2]{NonZeroColumns( b[5] )};
 #! [ <A non-zero 7 x 13 matrix over an external ring>,
 #!   [ D1_, D2_, D3_, D4_, D5_, 1, D5, D4, D3, D2, D1, D5^2, D4*D5 ] ]
 
-
+## RowEchelonForm 546 x 600 : Z(d,s,a1,a2,a3,a4,a5)
 ## computing the above prel2 took 2 hours and 31 GB
 
 #ibps := MatrixOfIBPRelations( LD );
