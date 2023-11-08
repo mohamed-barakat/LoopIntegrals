@@ -25,9 +25,20 @@ prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgI
 ## computing prel2 takes 52 seconds and 2.8 GB
 
 Q := CoefficientsRing( AmbientRing( Y ) );
-# m := Q * prel2[1];
-# b := BasisOfRows( m );
-# homalgDisplay( [ "map(factor,", b, ")" ] );
+m := Q * prel2[1];
+b := BasisOfRows( m );
+homalgDisplay( [ "map(factor,", b, ")" ] );
+
+prel2[2]{NonZeroColumns( b[1] )};
+#! [ D1_, 1, D1, D2, D3, D4 ]
+prel2[2]{NonZeroColumns( b[2] )};
+#! [ D2_, 1, D1, D2, D3, D4 ]
+prel2[2]{NonZeroColumns( b[3] )};
+#! [ D3_, 1, D1, D2, D3, D4 ]
+prel2[2]{NonZeroColumns( b[4] )};
+#! [ D4_, 1, D1, D2, D3, D4 ]
+prel2[2]{NonZeroColumns( b[5] )};
+#! [ D5_, 1, D1, D2, D3, D4 ]
 
 #ibps := MatrixOfIBPRelations( LD );
 #<A 6 x 1 matrix over a residue class ring>
