@@ -199,6 +199,9 @@ tau := RightDivide( nf, ibps );
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
 prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", basis_of_relative_syzygies := true );
+#! [ <A non-zero 12 x 15 matrix over an external ring>,
+#!   [ D1_*D2_, D1_*D3_, D2_*D3_, D3_^2, D1_*D4_, D2_*D4_, D3_*D4_, D4_^2,
+#!     D1_, D2_, D3_, D4_, 1, D4, D3 ] ]
 
 ## RowEchelonForm 180 x 192 : Z(d,s12,s14,a1,a2,a3,a4): takes about a minute and 4,4 GB
 
