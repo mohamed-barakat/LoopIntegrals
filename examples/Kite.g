@@ -130,12 +130,26 @@ Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa );
+prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", reduced_basis_of_relative_syzygies := true );
+
+## RowEchelonForm 210 x 226 : Z(d,s,a1,a2,a3,a4,a5)
+## computing the above prel2 took 9 seconds and 600 MB
 
 Q := CoefficientsRing( AmbientRing( Y ) );
-# m := Q * prel2[1];
-# b := BasisOfRows( m );
-# homalgDisplay( [ "map(factor,", b, "):" ] );
+m := Q * prel2[1];
+b := BasisOfRows( m );
+homalgDisplay( [ "map(factor,", b, "):" ] );
+
+prel2[2]{NonZeroColumns( b[12] )};
+#! [ D1_, 1, D1, D2 ]
+prel2[2]{NonZeroColumns( b[13] )};
+#! [ D2_, 1, D1, D2 ]
+prel2[2]{NonZeroColumns( b[14] )};
+#! [ D3_, 1, D1, D2 ]
+prel2[2]{NonZeroColumns( b[15] )};
+#! [ D4_, 1, D1, D2 ]
+prel2[2]{NonZeroColumns( b[16] )};
+#! [ D5_, 1, D1, D2 ]
 
 # BasisOfRows( mibps );
 # Error, the external CAS Maple (which should be running with PID 1741341) seems to have died!
