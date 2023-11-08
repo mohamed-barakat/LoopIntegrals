@@ -119,6 +119,14 @@ Ypol := HomalgRing( ibps );
 Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
+Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
+#prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", reduced_basis_of_relative_syzygies := true );
+
+## there are rational coefficients in MatrixOfSpecialIBPRelations
+## that prevent it from being typecasted to Hecke,
+## the corresponding rows of MatrixOfSpecialIBPRelations need to be
+## multiplied with their common denominator first
+
 # gap> BasisOfRows( ibps );
 # -> 180 days, 41 GB
 
