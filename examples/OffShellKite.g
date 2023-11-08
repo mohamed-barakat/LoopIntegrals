@@ -23,7 +23,7 @@ Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", reduced_basis_of_relative_syzygies := true );
+#prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", reduced_basis_of_relative_syzygies := true );
 
 ## RowEchelonForm 588 x 546 : Z(m,d,s,a1,a2,a3,a4,a5)
 
