@@ -23,12 +23,24 @@ Y := RationalDoubleShiftAlgebra( R );
 mibps := Y * ibps;
 
 Qa := FieldOfCoefficientsOfLoopDiagramInHecke( LD );
-prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", basis_of_relative_syzygies := true );
+prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", reduced_basis_of_relative_syzygies := true );
+
+## RowEchelonForm 588 x 546 : Z(m,d,s,a1,a2,a3,a4,a5)
 
 Q := CoefficientsRing( AmbientRing( Y ) );
 # m := Q * prel2[1];
 # b := BasisOfRows( m );
 # homalgDisplay( [ "map(factor,", b, ")" ] );
+
+#prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", basis_of_relative_syzygies := false );
+
+## RowEchelonForm 672 x 546 : Z(m,d,s,a1,a2,a3,a4,a5)
+## runs out of memory within a day
+
+#prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", basis_of_relative_syzygies := true );
+
+## RowEchelonForm 756 x 796 : Z(m,d,s,a1,a2,a3,a4,a5)
+## killed after two days
 
 ## prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 ## Manually killed after 488G 2170h
