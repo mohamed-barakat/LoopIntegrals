@@ -40,13 +40,12 @@ Q := CoefficientsRing( AmbientRing( Y ) );
 #prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2, Qa : homalgIOMode := "d", basis_of_relative_syzygies := true );
 
 ## RowEchelonForm 756 x 796 : Z(m,d,s,a1,a2,a3,a4,a5)
-## killed after two days
 
 ## prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
-## Manually killed after 488G 2170h
+## Old Hecke: Manually killed after 488G 2170h
 
 ## prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
-## finished after 328G 327h with the last RowEchelonForm step
+## New Hecke: finished after 328G 327h with the last RowEchelonForm step
 ## m;
 ## <A non-zero 21 x 46 matrix over an external ring>
 
