@@ -41,13 +41,16 @@ Q := CoefficientsRing( AmbientRing( Y ) );
 
 ## RowEchelonForm 756 x 796 : Z(m,d,s,a1,a2,a3,a4,a5)
 
-## prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
+## prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2 );
 ## Old Hecke: Manually killed after 488G 2170h
 
-## prel2 := ColumnReversedMatrixOfCoefficientsOfParametricIBPs( LD, 2 );
-## New Hecke: finished after 328G 327h with the last RowEchelonForm step
+## prel2 := MatrixOfCoefficientsOfParametricIBPs( LD, 2 );
+## New Hecke: finished after 342G/156G 327h with the last RowEchelonForm step
 ## m;
 ## <A non-zero 21 x 46 matrix over an external ring>
 
-## mat[5]{range} =
-## [ D1_*D2_, D2_^2, D1_*D3_, D2_*D3_, D3_^2, D1_*D4_, D2_*D4_, D3_*D4_, D4_^2, D1_*D5_, D2_*D5_, D3_*D5_, D4_*D5_, D1_, D2_, D3_, D4_, D5_, 1, D2, D5, D1, D3, D4, D3*D4, D5^2, D4*D5, D3*D5, D2*D5, D1*D5, D4^2, D2*D4, D1*D4, D3^2, D2*D3, D1*D3, D2^2, D1*D2, D1^2, D4*D5^2, D3*D5^2, D2*D5^2, D1*D5^2, D4^2*D5, D3*D4*D5, D2*D4*D5 ]
+## prel2[2] :=
+##   [ D2*D4*D5, D3*D4*D5, D4^2*D5, D1*D5^2, D2*D5^2, D3*D5^2, D4*D5^2,
+##      D1^2, D1*D2, D2^2, D1*D3, D2*D3, D3^2, D1*D4, D2*D4, D4^2, D1*D5, D2*D5, D3*D5, D4*D5, D5^2, D3*D4,
+##      D4, D3, D1, D5, D2, 1,
+##      D5_, D4_, D3_, D2_, D1_, D4_*D5_, D3_*D5_, D2_*D5_, D1_*D5_, D4_^2, D3_*D4_, D2_*D4_, D1_*D4_, D3_^2, D2_*D3_, D1_*D3_, D2_^2, D1_*D2_ ]
