@@ -369,6 +369,10 @@ DeclareOperation( "DoubleShiftAlgebraWithDimensionShiftAndReverseOrder",
         [ IsHomalgRing ] );
 
 #! @Arguments R
+DeclareOperation( "RationalShiftAlgebra",
+        [ IsHomalgRing ] );
+
+#! @Arguments R
 DeclareOperation( "RationalDoubleShiftAlgebra",
         [ IsHomalgRing ] );
 

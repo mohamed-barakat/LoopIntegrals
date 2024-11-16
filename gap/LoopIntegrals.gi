@@ -1260,6 +1260,65 @@ InstallMethod( DoubleShiftAlgebraWithDimensionShiftAndReverseOrder,
 end );
 
 ##
+InstallMethod( RationalShiftAlgebra,
+        [ IsHomalgRing ],
+        
+  function( R )
+    local Q, r, Ds, c, exponents, B, A, reverse, shifts, Y;
+    
+    reverse := ValueOption( "reverse" );
+    
+    if not reverse = true then
+        if IsBound( R!.RationalShiftAlgebra ) then
+            return R!.RationalShiftAlgebra;
+        fi;
+    else
+        if IsBound( R!.RationalShiftAlgebraWithReverseOrder ) then
+            return R!.RationalShiftAlgebraWithReverseOrder;
+        fi;
+    fi;
+    
+    Q := HomalgFieldOfRationalsInMaple();
+    
+    B := Q * List( Indeterminates( BaseRing( R ) ), String );
+    
+    Ds := RelativeIndeterminatesOfPolynomialRing( R );
+    
+    Ds := List( Ds, String );
+    
+    c := Length( Ds );
+    
+    exponents := List( [ 1 .. c ], i -> Concatenation( LOOP_INTEGRALS.ExponentSymbol, String( i ) ) );
+    
+    A := B * JoinStringsWithSeparator( exponents );
+    
+    shifts := Ds;
+    
+    if not reverse = true then
+        
+        Y := RationalShiftAlgebra( A, shifts : steps := -1 );
+        
+    else
+        
+        Y := RationalShiftAlgebra( A, shifts : steps := 1 );
+        
+    fi;
+    
+    Y!.Ds := Ds;
+    
+    R!.RationalShiftAlgebra := Y;
+    
+    if not reverse = true then
+        R!.RationalShiftAlgebra := Y;
+    else
+        R!.RationalShiftAlgebraWithReverseOrder := Y;
+    fi;
+    
+    return Y;
+    
+end );
+
+##
 InstallMethod( RationalDoubleShiftAlgebra,
         [ IsHomalgRing ],
         
