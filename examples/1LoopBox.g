@@ -137,3 +137,40 @@ HomalgRing( dibps );
 #! Q[s12,s14][d,a1,a2,a3,a4]<D,D_,D1,D1_,D2,D2_,D3,D3_,D4,D4_>
 #! /( D4*D4_-1, D3*D3_-1, D2*D2_-1, D1*D1_-1, D*D_-1 )
 #! @EndExample
+
+Y := RationalDoubleShiftAlgebra( R );
+
+ribps := Y * ibps;
+
+G := BasisOfRows( ribps );
+
+a1D1_ := "a1*D1_" / Y;
+a2D2_ := "a2*D2_" / Y;
+a3D3_ := "a3*D3_" / Y;
+a4D4_ := "a4*D4_" / Y;
+
+RHS1 := NormalForm( a1D1_, G );
+RHS2 := NormalForm( a2D2_, G );
+RHS3 := NormalForm( a3D3_, G );
+RHS4 := NormalForm( a4D4_, G );
+
+NF1 := a1D1_ - RHS1;
+NF2 := a2D2_ - RHS2;
+NF3 := a3D3_ - RHS3;
+NF4 := a4D4_ - RHS4;
+
+NFD1 := NF1 * ( "D1" / Y );
+NFD2 := NF2 * ( "D2" / Y );
+NFD3 := NF3 * ( "D3" / Y );
+NFD4 := NF4 * ( "D4" / Y );
+
+NFD := HomalgMatrix( [ NFD1, NFD2, NFD3, NFD4 ], 4, 1, Y );
+
+y := RationalShiftAlgebra( R );
+
+nf1 := NFD1 / y;
+nf2 := NFD2 / y;
+nf3 := NFD3 / y;
+nf4 := NFD4 / y;
+
+nf := HomalgMatrix( [ nf1, nf2, nf3, nf4 ], 4, 1, y );
