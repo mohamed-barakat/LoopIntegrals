@@ -198,6 +198,10 @@ DeclareAttribute( "PairOfMatricesOfLoopDiagramInPropagators",
         IsLoopDiagram );
 
 #! @Arguments LD
+DeclareAttribute( "PairOfMatricesOfLoopDiagramInPropagatorsAndNumerators",
+        IsLoopDiagram );
+
+#! @Arguments LD
 DeclareAttribute( "IBPGeneratingMatrixOfLoopDiagramInPropagators",
         IsLoopDiagram );
 

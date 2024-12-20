@@ -1039,6 +1039,18 @@ InstallMethod( IBPGeneratingMatrixOfLoopDiagramInPropagators,
 end );
 
 ##
+InstallMethod( PairOfMatricesOfLoopDiagramInPropagatorsAndNumerators,
+        [ IsLoopDiagram and HasRelationsOfExternalMomenta and HasPropagators and HasNumerators and HasExtraLorentzInvariants ],
+        
+  function( LD )
+
+    return [ IBPGeneratingMatrixOfLoopDiagramInPropagators( LD ),
+             ExpressInPropagatorsAndNumeratorsAndExtraLorentzInvariants(
+                     HomalgDiagonalMatrix( Concatenation( Propagators( LD ), Numerators( LD ) ) ), LD ) ];
+    
+end );
+
+##
 InstallMethod( JacobianOfCoefficientsVectorInPropagators,
         [ IsHomalgMatrix, IsLoopDiagram and HasRelationsOfExternalMomenta and HasPropagators and HasNumerators and HasExtraLorentzInvariants ],
         
